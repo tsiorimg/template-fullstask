@@ -34,3 +34,7 @@ backend/.pytest_cache/
 # environment variables
 .env
 .env.*
+
+# Generated CSS files
+classtocss_apply.css
+classtocss_global.css
