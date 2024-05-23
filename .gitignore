@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build directories
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Python virtual environment
+venv/
+
+# Docker
+*.container
+*.image
+docker-compose.override.yml
+
+# Submodules
+frontend/node_modules/
+backend/__pycache__/
+backend/instance/
+backend/.pytest_cache/
+
+# environment variables
+.env
+.env.*
