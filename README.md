@@ -16,12 +16,39 @@ git clone --recurse-submodules https://github.com/tsiorimg/template-fullstask.gi
 cd template-fullstask
 ```
 ### Setting Up Environment Variables
-Create a .env file in the root directory and add the following environment variables:
+Create two environment files: .env.development and .env.production in the root directory.
+
+`.env.development`
+
 ```bash
-POSTGRES_DB=your_database_name
-POSTGRES_USER=your_database_user
-POSTGRES_PASSWORD=your_database_password
-DATABASE_URL=postgresql://your_database_user:your_database_password@postgres:5432/your_database_name
+POSTGRES_DB=your_dev_database_name
+POSTGRES_USER=your_dev_database_user
+POSTGRES_PASSWORD=your_dev_database_password
+DATABASE_URL=postgresql://your_dev_database_user:your_dev_database_password@postgres:5432/your_dev_database_name
+ENV_CONFIG=development
+NODE_OPTIONS=--openssl-legacy-provider
+REACT_APP_API_URL=http://127.0.0.1:5000
+```
+
+
+`.env.production`
+
+```bash
+POSTGRES_DB=your_prod_database_name
+POSTGRES_USER=your_prod_database_user
+POSTGRES_PASSWORD=your_prod_database_password
+DATABASE_URL=postgresql://your_prod_database_user:your_prod_database_password@postgres:5432/your_prod_database_name
+ENV_CONFIG=production
+NODE_OPTIONS=--openssl-legacy-provider
+REACT_APP_API_URL=http://backend:5000
+```
+
+Additionally, create a .env file that specifies the current environment configuration.
+
+`.env`
+
+```bash
+ENV_CONFIG=development  # or production
 ```
 
 ### Running the Application
@@ -37,6 +64,10 @@ docker-compose up -d --build
 ```bash
 docker-compose down
 ```
+
+### Switching Environments
+
+To switch between development and production environments, modify the ENV_CONFIG value in the .env file.
 
 ### Issues and Improvements
 

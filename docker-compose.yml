@@ -3,18 +3,17 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env.${ENV_CONFIG}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
     image: assistant-backend:latest
     build: ./backend
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
+    env_file:
+      - .env
+      - .env.${ENV_CONFIG}
     ports:
       - "5000:5000"
     volumes:
@@ -29,8 +28,9 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
-    environment:
-      NODE_OPTIONS: --openssl-legacy-provider
+    env_file:
+      - .env
+      - .env.${ENV_CONFIG}
     depends_on:
       - backend
 
