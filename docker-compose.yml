@@ -9,13 +9,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
-    image: assistant-backend:latest
+    image: assistant-backend-${ENV_CONFIG}:latest
     build: ./backend
     env_file:
       - .env
       - .env.${ENV_CONFIG}
     ports:
       - "5000:5000"
+      - "5678:5678"
     volumes:
       - ./backend:/app
     depends_on:

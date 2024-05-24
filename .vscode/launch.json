@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flask (Docker)",
+            "type": "debugpy",
+            "request": "attach",
+            "debugServer": 5678,
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/backend",
+                    "remoteRoot": "/app"
+                }
+            ],
+            "justMyCode":false,
+        }
+    ]
+}
