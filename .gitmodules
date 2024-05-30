@@ -4,3 +4,6 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/tsiorimg/template-flask-backend.git
+[submodule "backend_django"]
+	path = backend_django
+	url = https://github.com/tsiorimg/backend_django.git
