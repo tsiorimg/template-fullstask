@@ -8,19 +8,42 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  # backend:
+  #   image: assistant-backend-${ENV_CONFIG}:latest
+  #   build: ./backend
+  #   env_file:
+  #     - .env
+  #     - .env.${ENV_CONFIG}
+  #   ports:
+  #     - "5000:5000"
+  #     - "5678:5678"
+  #   volumes:
+  #     - ./backend:/app
+  #   depends_on:
+  #     - postgres
   backend:
-    image: assistant-backend-${ENV_CONFIG}:latest
-    build: ./backend
+    build:
+      context: ./backend_django
+      dockerfile: Dockerfile
+    image: assistant-backend-django-${ENV_CONFIG}:latest
     env_file:
       - .env
       - .env.${ENV_CONFIG}
-    ports:
-      - "5000:5000"
-      - "5678:5678"
     volumes:
-      - ./backend:/app
+      - ./backend_django:/app
+      - ./backend_django/staticfiles:/app/staticfiles
     depends_on:
       - postgres
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend_django/staticfiles:/app/staticfiles
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
 
   frontend:
     image: assistant-frontend:latest
